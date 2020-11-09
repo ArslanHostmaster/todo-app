@@ -10,6 +10,6 @@ RUN npm install pm2 -g
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 5001
 
 CMD ["pm2-runtime", "app.js"]
