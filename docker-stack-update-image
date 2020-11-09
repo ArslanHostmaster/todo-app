@@ -22,7 +22,7 @@
   - name: building docker image
     command: docker build -t todoapp:container .
     args:
-      chdir: chdir=/home/ansadmin/docker-node-mongo-todo-app
+      chdir: chdir=/home/ansadmin/todo-app
 
   - name: deploying docker container
     command: docker run -d --name node-todo-app-container -p 5001:5001 todoapp:container
