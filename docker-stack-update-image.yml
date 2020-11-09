@@ -13,16 +13,16 @@
   - name: remove current docker image
     command: docker rmi todoapp:container
     ignore_errors: yes
-#    register: result
-#    failed_when:
-#      - result.rc == 0
-#      - '"docker" not in result.stdout'
+    register: result
+    failed_when:
+      - result.rc == 0
+      - '"docker" not in result.stdout'
 
 
   - name: building docker image
     command: docker build -t todoapp:container .
     args:
-      chdir: chdir=/home/ansadmin/todo-app
+      chdir: todo-app
 
   - name: deploying docker container
     command: docker run -d --name node-todo-app-container -p 5001:5001 todoapp:container
