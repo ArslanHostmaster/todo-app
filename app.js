@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -34,7 +34,7 @@ app.patch('/todo/:id', (req, res) => {
 
 const mongoose = require('mongoose');
 const ToDo = require('./toDoModel.js').ToDo;
-const DB_URI = 'mongodb://172.17.0.4:27017/toDoApp';
+const DB_URI = 'mongodb+srv://techbarProd:WCQ4jQtI1g42@cluster0.dcsav.mongodb.net/admin?retryWrites=true&w=majority';
 
 mongoose.connect(DB_URI).then(() => {
   console.log('Listening on port: ' + PORT);
