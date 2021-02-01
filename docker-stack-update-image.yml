@@ -25,4 +25,4 @@
       chdir: todo-app
 
   - name: deploying docker container
-    command: docker run -d --name node-todo-app-container -p 5001:5001 todoapp:container
+    command: docker run -d --name node-todo-app-container -p 10100:5000 todoapp:container
