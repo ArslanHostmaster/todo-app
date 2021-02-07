@@ -1,0 +1,19 @@
+---
+- hosts: ansible-server
+  become: true
+
+  tasks:
+  - name: create docker image using war file
+    command: docker build -t todoapp:latest .
+    args:
+      chdir: /home/ansadmin/kubernetes/todo-app
+
+  - name: create tag to image
+    command: docker tag todoapp imarslan/todoapp:latest
+
+  - name: push image on to dockerhub
+    command: docker push imarslan/todoapp
+
+  - name: remove docker images form ansible server
+    command: docker rmi todoapp:latest imarslan/todoapp
+    ignore_errors: yes

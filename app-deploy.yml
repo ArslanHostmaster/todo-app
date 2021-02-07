@@ -1,0 +1,26 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: todoapp
+spec:
+  selector:
+    matchLabels:
+      app: todoapp-mongo
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+
+  template:
+    metadata:
+      labels:
+        app: todoapp-mongo
+    spec:
+      containers:
+      - name: todoapp-mongo
+        image: imarslan/todoapp
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
