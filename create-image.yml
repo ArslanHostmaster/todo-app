@@ -11,6 +11,9 @@
   - name: create tag to image
     command: docker tag todoapp imarslan/todoapp:latest
 
+  - name: login to dockerhub
+    command: cat ~/my_password.txt | docker login --username imarslan --password-stdin
+    
   - name: push image on to dockerhub
     command: docker push imarslan/todoapp
 
