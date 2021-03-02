@@ -3,11 +3,11 @@
   become: true
   tasks:
   - name: Remove if we have old docker stack
-    command: docker stack rm node-todo-app
+    command: docker stack rm todoapp
     ignore_errors: yes
 
   - name: Remove current docker image
-    command: docker rmi -f imarslan/todoapp:latest
+    command: docker rmi -f todoapp:latest
     ignore_errors: yes
     register: result
     failed_when:
@@ -15,9 +15,9 @@
       - '"docker" not in result.stdout'
   
   - name: Building docker image
-    command: chdir=/home/ansadmin/docker-node-mongo-todo-app docker build -t imarslan/todoapp:latest .
+    command: chdir=/home/ansadmin/docker/todoapp docker build -t todoapp:latest .
     ignore_errors: yes
 
   - name: Deploying docker stack
-    command: chdir=/home/ansadmin/docker-node-mongo-todo-app docker stack deploy --compose-file docker-compose.yml node-todo-app
+    command: chdir=/home/ansadmin/docker/todoapp docker stack deploy --compose-file docker-compose.yml todoapp
 
