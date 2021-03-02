@@ -1,6 +1,6 @@
 ---
 - hosts: swarm-node-master
-  become: true
+  become: false
   tasks:
   - name: Remove if we have old docker stack
     command: docker stack rm todoapp
