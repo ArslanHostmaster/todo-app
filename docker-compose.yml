@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   todoapp:
-    image: todoapp:latest
+    image: 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
     networks:
       - traefik-public
     deploy:

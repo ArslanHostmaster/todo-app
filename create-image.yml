@@ -1,22 +1,25 @@
 ---
-- hosts: ansible-server
+- hosts: swarm-node-ecr
   become: true
 
   tasks:
+  - name: login to registry
+    command: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 878919740555.dkr.ecr.us-east-1.amazonaws.com
+
   - name: create docker image using war file
-    command: docker build -t todoapp:latest .
+    command: docker build -t todoapp .
     args:
-      chdir: /home/ansadmin/kubernetes/todo-app
+      chdir: /home/ec2-user/docker/todoapp
+
+  - name: verify that the image was created correctly.
+    command: docker images --filter reference=todoapp
 
   - name: create tag to image
-    command: docker tag todoapp imarslan/todoapp:latest
+    command: docker tag todoapp:latest 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
 
-  - name: login to dockerhub
-    command: cat ~/my_password.txt | docker login --username imarslan --password-stdin
-    
   - name: push image on to dockerhub
-    command: docker push imarslan/todoapp
+    command: docker push 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
 
   - name: remove docker images form ansible server
-    command: docker rmi todoapp:latest imarslan/todoapp
+    command: docker rmi todoapp:latest 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
     ignore_errors: yes

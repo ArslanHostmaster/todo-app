@@ -1,5 +1,5 @@
 ---
-- hosts: ansible-server
+- hosts: swarm-node-master
   become: true
   tasks:
   - name: Remove if we have old docker stack
@@ -7,17 +7,17 @@
     ignore_errors: yes
 
   - name: Remove current docker image
-    command: docker rmi -f todoapp:latest
+    command: docker rmi -f 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
     ignore_errors: yes
     register: result
     failed_when:
       - result.rc == 0
       - '"docker" not in result.stdout'
   
-  - name: Building docker image
-    command: chdir=/home/ansadmin/docker/todoapp docker build -t todoapp:latest .
+  - name: pull from registry
+    command: docker pull 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
     ignore_errors: yes
 
   - name: Deploying docker stack
-    command: chdir=/home/ansadmin/docker/todoapp docker stack deploy --compose-file docker-compose.yml todoapp
+    command: chdir=/home/ec2-user/docker/todoapp docker stack deploy --compose-file docker-compose.yml todoapp
 
