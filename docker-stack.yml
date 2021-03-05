@@ -3,9 +3,9 @@
   become: false
   tasks:
 
-  - name: login to registry
-    command: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 878919740555.dkr.ecr.us-east-1.amazonaws.com
-    ignore_errors: yes
+#  - name: login to registry
+#    command: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 878919740555.dkr.ecr.us-east-1.amazonaws.com
+#    ignore_errors: yes
 
   - name: Remove if we have old docker stack
     command: docker stack rm todoapp
