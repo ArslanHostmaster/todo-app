@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   todoapp:
-    image: 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
+    image: registry.dev-ops.work/todoapp:latest
     networks:
       - traefik-public
     deploy:
@@ -14,10 +14,10 @@ services:
         - traefik.enable=true
         - traefik.docker.network=traefik-public
         - traefik.constraint-label=traefik-public
-        - traefik.http.routers.todoapp-http.rule=Host(`todoapp1.dev-ops.work`)
+        - traefik.http.routers.todoapp-http.rule=Host(`todoapp.dev-ops.work`)
         - traefik.http.routers.todoapp-http.entrypoints=http
         - traefik.http.routers.todoapp-http.middlewares=https-redirect
-        - traefik.http.routers.todoapp-https.rule=Host(`todoapp1.dev-ops.work`)
+        - traefik.http.routers.todoapp-https.rule=Host(`todoapp.dev-ops.work`)
         - traefik.http.routers.todoapp-https.entrypoints=https
         - traefik.http.routers.todoapp-https.tls=true
         - traefik.http.routers.todoapp-https.tls.certresolver=le

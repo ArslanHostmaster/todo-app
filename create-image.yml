@@ -1,5 +1,5 @@
 ---
-- hosts: swarm-node-ecr
+- hosts: docker-swarm-ci
   become: false
 
   tasks:
@@ -16,11 +16,11 @@
     command: docker images --filter reference=todoapp
 
   - name: create tag to image
-    command: docker tag todoapp:latest 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
+    command: docker tag todoapp:latest registry.dev-ops.work/todoapp:latest
 
   - name: push image on to dockerhub
-    command: docker push 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
+    command: docker push registry.dev-ops.work/todoapp:latest
 
   - name: remove docker images form ansible server
-    command: docker rmi todoapp:latest 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
+    command: docker rmi todoapp:latest registry.dev-ops.work/todoapp:latest
     ignore_errors: yes

@@ -1,5 +1,5 @@
 ---
-- hosts: swarm-node-master
+- hosts: docker-swarm-cd
   become: false
   tasks:
 
@@ -12,7 +12,7 @@
     ignore_errors: yes
 
   - name: Remove current docker image
-    command: docker rmi -f 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
+    command: docker rmi -f registry.dev-ops.work/todoapp:latest
     ignore_errors: yes
     register: result
     failed_when:
@@ -20,7 +20,7 @@
       - '"docker" not in result.stdout'
   
   - name: pull from registry
-    command: docker pull 878919740555.dkr.ecr.us-east-1.amazonaws.com/todoapp:latest
+    command: docker pull registry.dev-ops.work/todoapp:latest
     ignore_errors: yes
 
   - name: Deploying docker stack
