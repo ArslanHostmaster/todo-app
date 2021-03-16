@@ -24,5 +24,5 @@
     ignore_errors: yes
 
   - name: Deploying docker stack
-    command: chdir=/home/ec2-user/docker/todoapp docker stack deploy --compose-file docker-compose.yml todoapp
+    command: docker stack deploy -c todoapp.yml todoapp
 
